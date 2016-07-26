@@ -2,6 +2,8 @@ CC   	= gcc
 CFLAGS  = -I.
 LIBS  	= -lpthread
 OBJS  	= manifest.o server.o client.o 
+INST_BIN = RUDPbin
+INST_ETC = RUDPetc
 
 all: $(OBJS)
 	$(CC) client.o manifest.o -o client $(CFLAGS) $(LIBS)
@@ -18,3 +20,9 @@ client.o: client.c client.h manifest.h
 
 clean: 
 	rm *.o client server
+	
+install:
+	mkdir -p $(INST_BIN)
+	mkdir -p $(INST_ETC)
+	mv -f server $(INST_BIN)
+	cp -rf *.txt $(INST_ETC)
